@@ -3,6 +3,7 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import FloatingNav from "../components/FloatingNav";
+import BottomBar from "../components/BottomBar";
 
 export default function Home() {
 
@@ -47,6 +48,7 @@ export default function Home() {
         </div>
       </div>
     </main>
+    <BottomBar />
     </>
   );
 }
