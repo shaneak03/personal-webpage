@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/react";
+import Image from "next/image";
 import FloatingNav from "../components/FloatingNav";
 
 export default function Home() {
@@ -10,10 +11,13 @@ export default function Home() {
       <FloatingNav />
       <main className="min-h-screen flex flex-col items-center justify-center bg-black transition-colors duration-300">
       <div className="flex flex-col items-center w-full px-4">
-      <img
+      <Image
           src="/profile.jpg"
           alt="Profile"
-          className="w-40 h-40 rounded-full mb-8 border-4 border-gradient-to-tr from-pink-500 to-purple-500 shadow-lg"
+          width={220}
+          height={220}
+          className="w-56 h-56 rounded-full mb-8 border-4 border-transparent bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 p-1 object-cover shadow-2xl"
+          priority
         />
         <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
           Hello!<br />
@@ -29,7 +33,6 @@ export default function Home() {
             color="primary" 
             className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-white text-black hover:bg-gray-100"
           >
-            <span role="img" aria-label="Mail" className="text-lg">📧</span>
             About Me
           </Button>
           <Button 
@@ -39,7 +42,6 @@ export default function Home() {
             color="secondary" 
             className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10"
           >
-            <span role="img" aria-label="Download" className="text-lg">⬇️</span>
             Projects
           </Button>
         </div>
