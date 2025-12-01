@@ -2,15 +2,11 @@
 
 import { Button } from "@heroui/react";
 import Image from "next/image";
-import FloatingNav from "../components/FloatingNav";
-import BottomBar from "../components/BottomBar";
 
 export default function Home() {
 
   return (
-    <>
-      <FloatingNav />
-      <main className="min-h-screen flex flex-col items-center justify-center bg-black transition-colors duration-300">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-black transition-colors duration-300">
       <div className="flex flex-col items-center w-full px-4">
       <Image
           src="/profile.jpg"
@@ -30,7 +26,7 @@ export default function Home() {
         <div className="flex gap-4">
           <Button 
             as="a" 
-            href="#contact" 
+            href="about" 
             color="primary" 
             className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-white text-black hover:bg-gray-100"
           >
@@ -38,17 +34,14 @@ export default function Home() {
           </Button>
           <Button 
             as="a" 
-            href="/cv.pdf" 
-            download 
+            href="projects" 
             color="secondary" 
             className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10"
           >
             Projects
           </Button>
         </div>
-      </div>
-    </main>
-    <BottomBar />
-    </>
+        </div>
+      </main>
   );
 }

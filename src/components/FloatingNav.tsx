@@ -16,7 +16,7 @@ interface FloatingNavProps {
 
 const defaultNavItems: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About Me", href: "/about" },
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
 ];

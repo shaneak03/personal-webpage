@@ -1,3 +1,5 @@
+const style = { filter: 'brightness(0) invert(1) opacity(0.8)' }
+
 export default function BottomBar() {
   return (
     <footer className="fixed bottom-0 left-0 w-full flex justify-center items-center bg-black py-3 z-40">
@@ -12,7 +14,7 @@ export default function BottomBar() {
             src="/github.svg"
             alt="GitHub"
             className="w-8 h-8 brightness-0 invert"
-            style={{ filter: 'brightness(0) invert(1) opacity(0.8)' }}
+            style={style}
           />
         </a>
         <a
@@ -25,7 +27,7 @@ export default function BottomBar() {
             src="/linkedin.png"
             alt="LinkedIn"
             className="w-8 h-8"
-            style={{ filter: 'brightness(0) invert(1) opacity(0.8)' }}
+            style={style}
           />
         </a>
       </div>
