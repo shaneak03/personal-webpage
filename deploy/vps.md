@@ -14,6 +14,4 @@
 
 1. Put this repo in a deploy directory, e.g. `/opt/personal-webpage`.
 2. Keep one checkout on the `release` branch and one on `dev`, or use two separate directories.
-3. Put your reverse proxy in front of the app and route:
-   - `shaneak03.dev` → container port `3000`
-   - `webpage-dev.shaneak03.dev` → container port `3001`
+3. Use your existing `cloudflared.yml` to point hostnames at the two internal services.
