@@ -17,7 +17,3 @@
 3. Put your reverse proxy in front of the app and route:
    - `shaneak03.dev` → container port `3000`
    - `webpage-dev.shaneak03.dev` → container port `3001`
-
-## Next step
-
-Once you’re ready, I can add the reverse-proxy config for the VPS you’re actually using (Caddy, Nginx, Traefik, etc.).
