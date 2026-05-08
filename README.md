@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Deployment
+
+This repo is set up for branch-based VPS deploys over SSH:
+
+- `release` → production at `shaneak03.dev`
+- `dev` → development at `webpage-dev.shaneak03.dev`
+
+GitHub Actions deploys by SSHing into the VPS and running:
+
+- `git pull --ff-only`
+- `docker compose up -d --build`
+
+See `deploy/vps.md` for the VPS layout, required GitHub secrets, and Cloudflare Tunnel port mapping.
+
 ## Getting Started
 
 First, run the development server:
