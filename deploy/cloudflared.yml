@@ -1,0 +1,6 @@
+ingress:
+  - hostname: shaneak03.dev
+    service: http://personal-webpage:3000
+  - hostname: webpage-dev.shaneak03.dev
+    service: http://personal-webpage-dev:3000
+  - service: http_status:404
