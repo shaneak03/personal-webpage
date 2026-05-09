@@ -1,7 +1,6 @@
 "use client";
 
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link } from "@heroui/react";
-import { useState } from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@heroui/react";
 
 interface NavItem {
   label: string;
