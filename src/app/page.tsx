@@ -18,7 +18,7 @@ export default function Home() {
         />
         <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
           Hello!<br />
-          I'm <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Shane Arkar Kyaw </span>
+          I&apos;m <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Shane Arkar Kyaw </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-300 text-center max-w-xl mb-8">
           I am currently a student at the National University of Singapore, pursuing a degree in Computer Science.  I have a strong interest in <strong>Software Engineering</strong> and <strong>Artificial Intelligence</strong>.
