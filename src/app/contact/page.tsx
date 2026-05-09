@@ -33,7 +33,7 @@ export default function Contact() {
       });
                 
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch {
       addToast({
         title: "Something went wrong",
         description: "Please try again later.",
