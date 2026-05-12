@@ -6,7 +6,7 @@ import { projects } from "@/data/projects";
 export default function Projects() {
 
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4">
+    <main className="min-h-screen px-4 pt-48 pb-32 sm:pt-36 sm:pb-24">
       <div className="max-w-5xl mx-auto">
         <MotionReveal className="text-center mb-16 pt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">

@@ -26,12 +26,14 @@ export default function FloatingNav({ items = defaultNavItems, className = "", n
   const pathname = usePathname();
 
   return (
-    <div className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 ${className}`}>
-      <nav 
-        className="bg-black/20 backdrop-blur-md border border-white/10 rounded-full shadow-lg px-8 py-3 flex items-center gap-8"
+    <div className={`fixed left-1/2 top-4 z-50 w-[calc(100%-1.25rem)] max-w-4xl -translate-x-1/2 sm:top-6 ${className}`}>
+      <nav
+        className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05))] px-4 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:rounded-full sm:px-6 sm:py-3"
       >
-        <p className="font-bold text-white text-lg">{name}</p>
-        <div className="flex gap-1">
+        <div className="flex items-center justify-center sm:justify-start">
+          <p className="text-base font-bold text-white sm:text-lg">{name}</p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-1">
           {items.map((item) => {
             const isActive = pathname === item.href;
 
@@ -39,10 +41,10 @@ export default function FloatingNav({ items = defaultNavItems, className = "", n
               <motion.div key={item.href} whileTap={{ scale: 0.96 }}>
                 <Link
                   href={item.href}
-                  className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                  className={`flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 sm:text-base ${
                     isActive
-                      ? "bg-white/12 text-white"
-                      : "text-white hover:text-gray-300 hover:bg-white/10"
+                      ? "bg-white/14 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+                      : "text-white/90 hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {item.label}

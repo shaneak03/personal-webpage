@@ -10,8 +10,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center transition-colors duration-300">
-      <MotionStagger className="flex w-full flex-col items-center px-4" delayChildren={0.1}>
+    <main className="flex min-h-screen flex-col items-center justify-start px-4 pt-44 pb-32 transition-colors duration-300 sm:justify-center sm:px-0 sm:pt-28 sm:pb-24">
+      <MotionStagger className="flex w-full flex-col items-center" delayChildren={0.1}>
         <MotionStaggerItem>
           <Image
             src="/profile.jpg"

@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden px-4 pt-28 pb-20 sm:px-6 lg:px-8">
+    <main className="relative min-h-screen overflow-hidden px-4 pt-48 pb-32 sm:px-6 sm:pt-36 sm:pb-24 lg:px-8">
       <div className="relative mx-auto max-w-6xl">
         <MotionReveal className="mb-12 text-center">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-orange-300/80">
