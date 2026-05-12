@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Providers from "./providers";
 import { Geist, Geist_Mono } from "next/font/google";
+// @ts-expect-error: CSS module import
 import "./globals.css";
 import FloatingNav from "@/components/FloatingNav";
 import BottomBar from "@/components/BottomBar";
