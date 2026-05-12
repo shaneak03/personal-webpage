@@ -134,6 +134,16 @@ export const projects: Project[] = [
         alt: "Hack4Good 2025 minimart homepage",
       },
     ],
+    links: [
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/kelix"
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/shaneak03/Hack4Good-KELIX",
+      }
+    ]
   },
   {
     title: "IceAxe - Hack&Roll 2025",
@@ -160,6 +170,16 @@ export const projects: Project[] = [
         alt: "Never Have I Ever",
       },
     ],
+    links: [
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/iceaxe-kelix"
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/shaneak03/HackNRoll-KELIX",
+      }
+    ]
   },
   {
     title: "Coming Soon",
