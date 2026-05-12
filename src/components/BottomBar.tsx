@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const style = { filter: 'brightness(0) invert(1) opacity(0.8)' }
 
 export default function BottomBar() {
@@ -10,10 +12,12 @@ export default function BottomBar() {
           rel="noopener noreferrer"
           className="opacity-70 transition-opacity duration-200 hover:opacity-100"
         >
-          <img
+          <Image
             src="/github.svg"
             alt="GitHub"
-            className="w-8 h-8 brightness-0 invert"
+            width={32}
+            height={32}
+            className="h-8 w-8 brightness-0 invert"
             style={style}
           />
         </a>
@@ -23,10 +27,12 @@ export default function BottomBar() {
           rel="noopener noreferrer"
           className="opacity-70 transition-opacity duration-200 hover:opacity-100"
         >
-          <img
+          <Image
             src="/linkedin.png"
             alt="LinkedIn"
-            className="w-8 h-8"
+            width={32}
+            height={32}
+            className="h-8 w-8"
             style={style}
           />
         </a>

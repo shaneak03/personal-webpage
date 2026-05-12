@@ -156,7 +156,7 @@ export const projects: Project[] = [
         alt: "Guess Who",
       },
       {
-        src: "/Hack4Good_2025_Never_Have_I_Ever.jpg",
+        src: "/HackNRoll_2025_Never_Have_I_Ever.jpg",
         alt: "Never Have I Ever",
       },
     ],

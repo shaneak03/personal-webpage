@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import type { Project } from "@/data/projects";
 
@@ -16,14 +16,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const media = project.media ?? [];
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
 
   const selectedImage =
     selectedImageIndex !== null ? media[selectedImageIndex] : null;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const closeLightbox = () => setSelectedImageIndex(null);
   const showPreviousImage = () => {
@@ -198,7 +193,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         )}
       </article>
 
-      {mounted && selectedImage &&
+      {typeof document !== "undefined" && selectedImage &&
         createPortal(
           <div
             className="fixed inset-0 z-[120] min-h-screen overflow-y-auto bg-black/85 backdrop-blur-lg"

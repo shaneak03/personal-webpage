@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
-import MotionReveal from "@/components/MotionReveal";
 import { MotionStagger, MotionStaggerItem } from "@/components/MotionStagger";
 
 export default function Home() {

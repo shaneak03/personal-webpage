@@ -50,7 +50,7 @@ export default function Contact() {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
             If you want to talk about a project, internship, collaboration, or just want
-            to say hi, send a message below and I'll reply as soon as I can.
+            to say hi, send a message below and I&apos;ll reply as soon as I can.
           </p>
         </MotionReveal>
 
@@ -63,7 +63,7 @@ export default function Contact() {
               Send a message
             </p>
             <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">
-              I'd love to hear from you
+              I&apos;d love to hear from you
             </h2>
           </div>
 
@@ -120,7 +120,7 @@ export default function Contact() {
                   id="contact-message"
                   variant="secondary"
                   fullWidth
-                  placeholder="Tell me what you're working on, what kind of help you need, or just say hello."
+                  placeholder="Tell me what you&apos;re working on, what kind of help you need, or just say hello."
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
                   aria-label="Message"
