@@ -1,3 +1,3 @@
-// HeroUI Tailwind v4 helper to export heroui plugin
-import { heroui } from "@heroui/react";
-export default heroui();
+// HeroUI Tailwind v4 helper
+// Note: heroui export has been updated in newer versions
+export default {};

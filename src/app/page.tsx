@@ -24,22 +24,18 @@ export default function Home() {
           I am currently a student at the National University of Singapore, pursuing a degree in Computer Science.  I have a strong interest in <strong>Software Engineering</strong> and <strong>Artificial Intelligence</strong>.
         </p>
         <div className="flex gap-4">
-          <Button 
-            as="a" 
-            href="about" 
-            color="primary" 
-            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-white text-black hover:bg-gray-100"
+          <a 
+            href="/about" 
+            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-white text-black hover:bg-gray-100 transition-colors"
           >
             About Me
-          </Button>
-          <Button 
-            as="a" 
-            href="projects" 
-            color="secondary" 
-            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10"
+          </a>
+          <a 
+            href="/projects" 
+            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10 transition-colors"
           >
             Projects
-          </Button>
+          </a>
         </div>
         </div>
       </main>

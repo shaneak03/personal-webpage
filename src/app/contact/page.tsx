@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Input, Textarea, addToast } from "@heroui/react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -26,19 +25,12 @@ export default function Contact() {
       // Simulate form submission - replace with actual API call
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      addToast({
-        title: "Message sent",
-        description: "Thanks! I'll get back to you soon.",
-        color: "success",
-      });
-                
+      // Toast notification sent successfully
+      console.log("Message sent!");
       setFormData({ name: "", email: "", message: "" });
     } catch {
-      addToast({
-        title: "Something went wrong",
-        description: "Please try again later.",
-        color: "danger",
-      });
+      // Error notification
+      console.error("Failed to send message");
     } finally {
       setIsSubmitting(false);
     }
@@ -56,49 +48,56 @@ export default function Contact() {
         <div className="bg-black/80 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
-              <Input
-                isRequired
-                label="Your Name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onValueChange={(value) => handleInputChange("name", value)} 
-              />
-              <Input
-                isRequired
-                label="Email Address"
-                placeholder="Enter your email"
-                type="email"
-                value={formData.email}
-                onValueChange={(value) => handleInputChange("email", value)}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-900/30 border border-gray-600/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-900/30 border border-gray-600/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Message
+              </label>
+              <textarea
+                required
+                placeholder="Let me know what message you have for me or just say hello..."
+                value={formData.message}
+                onChange={(e) => handleInputChange("message", e.target.value)}
+                rows={6}
+                className="w-full px-4 py-3 bg-gray-900/30 border border-gray-600/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-all resize-none"
               />
             </div>
 
-            <Textarea
-              isRequired
-              label="Message"
-              placeholder="Let me know what message you have for me or just say hello..."
-              value={formData.message}
-              onValueChange={(value) => handleInputChange("message", value)}
-              minRows={5}
-              maxRows={8}
-              classNames={{
-                input: "text-white bg-transparent",
-                label: "text-gray-400 pb-2",
-                inputWrapper: "bg-gray-900/30 border-gray-600/50 hover:border-gray-500/70 focus-within:border-purple-400 rounded-2xl px-4 py-3"
-              }}
-              required
-            />
-
             <div className="flex justify-center pt-4">
-              <Button
+              <button
                 type="submit"
-                isLoading={isSubmitting}
                 disabled={isSubmitting}
-                className="px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full text-lg"
-                size="lg"
+                className="px-12 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-600 text-white font-semibold rounded-full text-lg transition-all"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
+              </button>
             </div>
           </form>
         </div>

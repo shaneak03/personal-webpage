@@ -9,12 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@heroui/react": "^2.8.2",
-    "framer-motion": "^12.23.12",
-    "next": "15.5.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "tailwindcss": "^4.1.12"
+    "@heroui/react": "^3.0.4",
+    "framer-motion": "^12.38.0",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
