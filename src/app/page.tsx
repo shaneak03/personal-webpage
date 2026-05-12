@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-black transition-colors duration-300">
+    <main className="min-h-screen flex flex-col items-center justify-center transition-colors duration-300">
       <div className="flex flex-col items-center w-full px-4">
         <Image
           src="/profile.jpg"

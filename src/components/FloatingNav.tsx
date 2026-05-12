@@ -1,5 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 interface NavItem {
   label: string;
   href: string;
@@ -19,6 +23,8 @@ const defaultNavItems: NavItem[] = [
 ];
 
 export default function FloatingNav({ items = defaultNavItems, className = "", name = "Shane" }: FloatingNavProps) {
+  const pathname = usePathname();
+
   return (
     <div className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 ${className}`}>
       <nav 
@@ -26,15 +32,24 @@ export default function FloatingNav({ items = defaultNavItems, className = "", n
       >
         <p className="font-bold text-white text-lg">{name}</p>
         <div className="flex gap-1">
-          {items.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              className="text-white hover:text-gray-300 transition-colors duration-200 px-4 py-2 rounded-full hover:bg-white/10 font-medium"
-            >
-              {item.label}
-            </a>
-          ))}
+          {items.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <motion.div key={item.href} whileTap={{ scale: 0.96 }}>
+                <Link
+                  href={item.href}
+                  className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-white/12 text-white"
+                      : "text-white hover:text-gray-300 hover:bg-white/10"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </nav>
     </div>

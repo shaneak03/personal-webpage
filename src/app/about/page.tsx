@@ -2,7 +2,7 @@
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-4">
+    <main className="min-h-screen pt-32 pb-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16 pt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
@@ -21,7 +21,6 @@ export default function About() {
             <li>Software Engineering & Architecture</li>
             <li>Artificial Intelligence & Machine Learning</li>
             <li>Full-Stack Web Development</li>
-            <li>Open Source Contributions</li>
           </ul>
 
           <h2 className="text-2xl font-bold mb-4 text-purple-400">Skills</h2>

@@ -4,7 +4,7 @@ import { projects } from "@/data/projects";
 export default function Projects() {
 
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-4">
+    <main className="min-h-screen pt-32 pb-20 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16 pt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">

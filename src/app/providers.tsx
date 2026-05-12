@@ -1,9 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
+import PageTransition from "@/components/PageTransition";
 
 export default function Providers({ children }: { children: ReactNode }) {
-  // HeroUI v3 no longer requires a provider wrapper for basic functionality
-  // Toast functionality is available via hooks without ToastProvider
-  return <>{children}</>;
+  return <PageTransition>{children}</PageTransition>;
 }
