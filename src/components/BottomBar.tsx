@@ -2,7 +2,7 @@ const style = { filter: 'brightness(0) invert(1) opacity(0.8)' }
 
 export default function BottomBar() {
   return (
-    <footer className="fixed bottom-0 left-0 w-full flex justify-center items-center bg-black py-3 z-40">
+    <footer className="fixed bottom-0 left-0 z-40 flex w-full items-center justify-center bg-black/35 py-3 backdrop-blur-md">
       <div className="flex gap-8">
         <a
           href="https://github.com/shaneak03"

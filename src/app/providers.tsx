@@ -1,12 +1,8 @@
 "use client";
 
-import { HeroUIProvider, ToastProvider } from '@heroui/react';
+import { ReactNode } from "react";
+import PageTransition from "@/components/PageTransition";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <HeroUIProvider>
-      <ToastProvider placement="top-center" />
-      {children}
-    </HeroUIProvider>
-  );
+export default function Providers({ children }: { children: ReactNode }) {
+  return <PageTransition>{children}</PageTransition>;
 }

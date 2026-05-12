@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Input, Textarea, addToast } from "@heroui/react";
+import { Button, Input, TextArea } from "@heroui/react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -23,85 +23,118 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      addToast({
-        title: "Message sent",
-        description: "Thanks! I'll get back to you soon.",
-        color: "success",
-      });
-                
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      alert("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
     } catch {
-      addToast({
-        title: "Something went wrong",
-        description: "Please try again later.",
-        color: "danger",
-      });
+      alert("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-black pt-32 pb-20 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-16 pt-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Contact <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Me</span>
+    <main className="relative min-h-screen overflow-hidden px-4 pt-28 pb-20 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mb-12 text-center">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-orange-300/80">
+            Get in touch
+          </p>
+          <h1 className="text-4xl font-extrabold text-white md:text-6xl">
+            Contact{" "}
+            <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Me
+            </span>
           </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
+            If you want to talk about a project, internship, collaboration, or just want
+            to say hi, send a message below and I'll reply as soon as I can.
+          </p>
         </div>
 
-        <div className="bg-black/80 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl">
+        <section className="mx-auto max-w-3xl rounded-[2rem] border border-white/10 bg-black/55 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl md:p-8">
+          <div className="mb-8 border-b border-white/10 pb-6 text-center">
+            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.24em] text-pink-200/80">
+              Send a message
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">
+              I'd love to hear from you
+            </h2>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <Input
-                isRequired
-                label="Your Name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onValueChange={(value) => handleInputChange("name", value)} 
-              />
-              <Input
-                isRequired
-                label="Email Address"
-                placeholder="Enter your email"
-                type="email"
-                value={formData.email}
-                onValueChange={(value) => handleInputChange("email", value)}
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="space-y-2">
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-slate-200">
+                    Your Name
+                  </label>
+                  <Input
+                    id="contact-name"
+                    variant="secondary"
+                    fullWidth
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    aria-label="Your Name"
+                    className="text-white placeholder:text-slate-500"
+                  />
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="space-y-2">
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-slate-200">
+                    Email Address
+                  </label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    variant="secondary"
+                    fullWidth
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    aria-label="Email Address"
+                    className="text-white placeholder:text-slate-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="contact-message" className="block text-sm font-medium text-slate-200">
+                Message
+              </label>
+              <TextArea
+                id="contact-message"
+                variant="secondary"
+                fullWidth
+                placeholder="Tell me what you're working on, what kind of help you need, or just say hello."
+                value={formData.message}
+                onChange={(e) => handleInputChange("message", e.target.value)}
+                aria-label="Message"
+                rows={10}
+                className="w-full min-h-[260px] rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-white placeholder:text-slate-500"
               />
             </div>
 
-            <Textarea
-              isRequired
-              label="Message"
-              placeholder="Let me know what message you have for me or just say hello..."
-              value={formData.message}
-              onValueChange={(value) => handleInputChange("message", value)}
-              minRows={5}
-              maxRows={8}
-              classNames={{
-                input: "text-white bg-transparent",
-                label: "text-gray-400 pb-2",
-                inputWrapper: "bg-gray-900/30 border-gray-600/50 hover:border-gray-500/70 focus-within:border-purple-400 rounded-2xl px-4 py-3"
-              }}
-              required
-            />
-
-            <div className="flex justify-center pt-4">
+            <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-slate-400">
+                Thanks for taking the time to reach out. I read every message.
+              </p>
               <Button
                 type="submit"
-                isLoading={isSubmitting}
-                disabled={isSubmitting}
-                className="px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full text-lg"
+                isDisabled={isSubmitting}
+                variant="primary"
                 size="lg"
+                className="rounded-full px-8 py-3 font-semibold shadow-lg shadow-orange-500/20"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </div>
           </form>
-        </div>
+        </section>
       </div>
     </main>
   );
