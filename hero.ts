@@ -1,3 +1,3 @@
-// HeroUI Tailwind v4 helper
-// Note: heroui export has been updated in newer versions
+// Tailwind CSS plugin placeholder
+// HeroUI components work directly without this plugin
 export default {};

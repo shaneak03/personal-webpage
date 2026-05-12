@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "../../hero";
 
 /* HeroUI Tailwind v4 theme tokens (optional) */
 @theme inline {

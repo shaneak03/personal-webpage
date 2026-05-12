@@ -1,14 +1,16 @@
 "use client";
 
-import { Button } from "@heroui/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Button } from "@heroui/react";
 
 export default function Home() {
+  const router = useRouter();
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-black transition-colors duration-300">
       <div className="flex flex-col items-center w-full px-4">
-      <Image
+        <Image
           src="/profile.jpg"
           alt="Profile"
           width={220}
@@ -24,20 +26,22 @@ export default function Home() {
           I am currently a student at the National University of Singapore, pursuing a degree in Computer Science.  I have a strong interest in <strong>Software Engineering</strong> and <strong>Artificial Intelligence</strong>.
         </p>
         <div className="flex gap-4">
-          <a 
-            href="/about" 
-            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-white text-black hover:bg-gray-100 transition-colors"
+          <Button
+            variant="primary"
+            className="px-6 py-3 rounded-full font-semibold"
+            onPress={() => router.push("/about")}
           >
             About Me
-          </a>
-          <a 
-            href="/projects" 
-            className="px-6 py-3 rounded-full font-semibold shadow flex items-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10 transition-colors"
+          </Button>
+          <Button
+            variant="outline"
+            className="px-6 py-3 rounded-full font-semibold"
+            onPress={() => router.push("/projects")}
           >
             Projects
-          </a>
+          </Button>
         </div>
-        </div>
-      </main>
+      </div>
+    </main>
   );
 }
