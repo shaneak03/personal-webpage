@@ -91,10 +91,6 @@ export default function MediaCarousel({
                     sizes="(max-width: 768px) 100vw, 560px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-sm font-medium text-white">{items[carouselIndex].alt}</p>
-                  </div>
                 </motion.button>
               </AnimatePresence>
 
@@ -170,7 +166,7 @@ export default function MediaCarousel({
           >
             <div className="min-h-screen px-4 py-8 md:px-8">
               <div
-                className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#081122] shadow-2xl shadow-black/60"
+                className="mx-auto flex h-[calc(100vh-4rem)] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#081122] shadow-2xl shadow-black/60"
                 onClick={(event) => event.stopPropagation()}
               >
                 <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8">
@@ -191,8 +187,8 @@ export default function MediaCarousel({
                   </button>
                 </div>
 
-                <div className="relative flex-1 bg-black">
-                  <div className="relative aspect-[16/10] min-h-[50vh] w-full">
+                <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black p-4 md:p-6">
+                  <div className="relative h-full w-full">
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.div
                         key={selectedImage.src}
@@ -229,28 +225,22 @@ export default function MediaCarousel({
                       >
                         Next
                       </button>
+                      <div className="absolute bottom-4 right-4 flex gap-2 rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-md">
+                        {items.map((item, index) => (
+                          <button
+                            key={item.src}
+                            type="button"
+                            onClick={() => setSelectedImageIndex(index)}
+                            className={`h-2.5 rounded-full transition-all duration-300 ${
+                              index === selectedImageIndex
+                                ? "w-8 bg-white"
+                                : "w-2.5 bg-white/30 hover:bg-white/50"
+                            }`}
+                            aria-label={`Show expanded image ${index + 1}`}
+                          />
+                        ))}
+                      </div>
                     </>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-4 border-t border-white/10 px-5 py-4 md:flex-row md:items-center md:justify-between md:px-8">
-                  <p className="text-sm text-slate-300">{selectedImage.alt}</p>
-                  {items.length > 1 && (
-                    <div className="flex gap-2">
-                      {items.map((item, index) => (
-                        <button
-                          key={item.src}
-                          type="button"
-                          onClick={() => setSelectedImageIndex(index)}
-                          className={`h-2.5 rounded-full transition-all duration-300 ${
-                            index === selectedImageIndex
-                              ? "w-8 bg-white"
-                              : "w-2.5 bg-white/30 hover:bg-white/50"
-                          }`}
-                          aria-label={`Show expanded image ${index + 1}`}
-                        />
-                      ))}
-                    </div>
                   )}
                 </div>
               </div>
