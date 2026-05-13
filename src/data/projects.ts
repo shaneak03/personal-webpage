@@ -1,13 +1,12 @@
+import type { MediaItem } from "@/types/media";
+
 export type Project = {
   title: string;
   period: string;
   description: string;
   highlights?: string[];
   tech?: string[];
-  media?: Array<{
-    src: string;
-    alt: string;
-  }>;
+  media?: MediaItem[];
   mediaPlaceholders?: string[];
   links?: Array<{
     label: string;

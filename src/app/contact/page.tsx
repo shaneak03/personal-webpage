@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Input, TextArea } from "@heroui/react";
+import { Button } from "@heroui/react";
 import MotionReveal from "@/components/MotionReveal";
 import { MotionStagger, MotionStaggerItem } from "@/components/MotionStagger";
 
@@ -74,41 +74,34 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid gap-5 md:grid-cols-2">
-                <MotionStaggerItem className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="space-y-2">
+                <MotionStaggerItem className="space-y-2">
                   <label htmlFor="contact-name" className="block text-sm font-medium text-slate-200">
                     Your Name
                   </label>
-                  <Input
+                  <input
                     id="contact-name"
-                    variant="secondary"
-                    fullWidth
+                    type="text"
                     placeholder="Enter your name"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     aria-label="Your Name"
-                    className="text-white placeholder:text-slate-500"
+                    className="min-h-[72px] w-full rounded-[1.5rem] border border-white/10 bg-white/5 px-5 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-colors duration-200 outline-none placeholder:text-slate-500 hover:bg-white/[0.08] focus:bg-white/[0.08] focus:border-white/20"
                   />
-                </div>
                 </MotionStaggerItem>
 
-                <MotionStaggerItem className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="space-y-2">
+                <MotionStaggerItem className="space-y-2">
                   <label htmlFor="contact-email" className="block text-sm font-medium text-slate-200">
                     Email Address
                   </label>
-                  <Input
+                  <input
                     id="contact-email"
                     type="email"
-                    variant="secondary"
-                    fullWidth
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     aria-label="Email Address"
-                    className="text-white placeholder:text-slate-500"
+                    className="min-h-[72px] w-full rounded-[1.5rem] border border-white/10 bg-white/5 px-5 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-colors duration-200 outline-none placeholder:text-slate-500 hover:bg-white/[0.08] focus:bg-white/[0.08] focus:border-white/20"
                   />
-                </div>
                 </MotionStaggerItem>
               </div>
 
@@ -116,29 +109,28 @@ export default function Contact() {
                 <label htmlFor="contact-message" className="block text-sm font-medium text-slate-200">
                   Message
                 </label>
-                <TextArea
+                <textarea
                   id="contact-message"
-                  variant="secondary"
-                  fullWidth
-                  placeholder="Tell me what you&apos;re working on, what kind of help you need, or just say hello."
+                  placeholder="Send me a message or just say hi!"
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
                   aria-label="Message"
                   rows={10}
-                  className="w-full min-h-[260px] rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-white placeholder:text-slate-500"
+                  className="w-full min-h-[260px] rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-colors duration-200 outline-none placeholder:text-slate-500 hover:bg-white/[0.08] focus:bg-white/[0.08] focus:border-white/20"
                 />
               </MotionStaggerItem>
 
               <MotionStaggerItem className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-slate-400">
-                  Thanks for taking the time to reach out. I read every message.
+                  Thanks for taking the time to reach out.
                 </p>
                 <Button
                   type="submit"
                   isDisabled={isSubmitting}
-                  variant="primary"
+                  variant="solid"
+                  color="warning"
                   size="lg"
-                  className="rounded-full px-8 py-3 font-semibold shadow-lg shadow-orange-500/20"
+                  className="rounded-full bg-gradient-to-r from-orange-400 via-pink-500 to-rose-500 px-8 py-3 font-semibold text-white shadow-[0_18px_40px_rgba(249,115,22,0.38)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_24px_50px_rgba(236,72,153,0.42)] data-[hover=true]:opacity-100 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-70"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
