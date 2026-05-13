@@ -23,17 +23,21 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const subject = encodeURIComponent(`Website contact from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+      );
+
+      window.location.href = `mailto:shanearkarkyaw@gmail.com?subject=${subject}&body=${body}`;
 
       addToast({
-        title: "Message sent",
-        description: "Thanks! I'll get back to you soon.",
+        title: "Opening your email app",
+        description: "Send the message from your mail client to get in touch.",
         color: "success",
       });
                 
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch {
       addToast({
         title: "Something went wrong",
         description: "Please try again later.",
