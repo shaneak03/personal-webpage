@@ -127,8 +127,7 @@ export default function Contact() {
                 <Button
                   type="submit"
                   isDisabled={isSubmitting}
-                  variant="solid"
-                  color="warning"
+                  variant="primary"
                   size="lg"
                   className="rounded-full bg-gradient-to-r from-orange-400 via-pink-500 to-rose-500 px-8 py-3 font-semibold text-white shadow-[0_18px_40px_rgba(249,115,22,0.38)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_24px_50px_rgba(236,72,153,0.42)] data-[hover=true]:opacity-100 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-70"
                 >
