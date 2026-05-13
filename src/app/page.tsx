@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@heroui/react";
 import { MotionStagger, MotionStaggerItem } from "@/components/MotionStagger";
 
 export default function Home() {
@@ -33,20 +32,20 @@ export default function Home() {
           </p>
         </MotionStaggerItem>
         <MotionStaggerItem className="flex gap-4">
-          <Button
-            variant="primary"
-            className="px-6 py-3 rounded-full font-semibold"
-            onPress={() => router.push("/about")}
+          <button
+            type="button"
+            className="cursor-pointer rounded-full bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 px-6 py-3 font-semibold text-white shadow-[0_16px_40px_rgba(236,72,153,0.28)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(236,72,153,0.36)]"
+            onClick={() => router.push("/about")}
           >
             About Me
-          </Button>
-          <Button
-            variant="outline"
-            className="px-6 py-3 rounded-full font-semibold"
-            onPress={() => router.push("/projects")}
+          </button>
+          <button
+            type="button"
+            className="cursor-pointer rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 font-semibold text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] hover:bg-white/[0.09] hover:shadow-[0_20px_50px_rgba(0,0,0,0.24)]"
+            onClick={() => router.push("/projects")}
           >
             Projects
-          </Button>
+          </button>
         </MotionStaggerItem>
       </MotionStagger>
     </main>
