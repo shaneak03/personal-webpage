@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
+import { FluidTransitionProvider, FluidContentWrapper } from "@/components/FluidTransition";
 import StarField from "@/components/StarField";
 import FloatingNav from "@/components/FloatingNav";
 import BottomBar from "@/components/BottomBar";
@@ -47,15 +48,22 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
-          {/* StarField, FloatingNav, BottomBar are outside PageTransition so
-              position:fixed works correctly (CSS transforms on PageTransition's
-              motion.div would otherwise create a new containing block) */}
+          {/* Fixed decorators that must NOT be inside any CSS-filtered wrapper */}
           <CursorGlow />
           <ProgressBar />
           <StarField />
-          <FloatingNav />
-          <Providers>{children}</Providers>
-          <BottomBar />
+
+          {/* FluidTransitionProvider owns the morph-goo overlay + navigation context.
+              FloatingNav, page content, and BottomBar live inside so they can call
+              navigate(), but FluidTransitionProvider's root has no transform/filter
+              so position:fixed still works relative to the viewport. */}
+          <FluidTransitionProvider>
+            <FloatingNav />
+            <FluidContentWrapper>
+              <Providers>{children}</Providers>
+            </FluidContentWrapper>
+            <BottomBar />
+          </FluidTransitionProvider>
         </ThemeProvider>
       </body>
     </html>

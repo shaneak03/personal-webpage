@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@/components/ThemeContext";
+import { usePageTransition } from "@/components/FluidTransition";
 
 const navItems = [
   { label: "Home",     href: "/" },
@@ -39,6 +39,7 @@ function MoonIcon() {
 export default function FloatingNav() {
   const pathname = usePathname();
   const { theme, toggle } = useTheme();
+  const navigate = usePageTransition();
 
   return (
     <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2 sm:top-6">
@@ -46,18 +47,21 @@ export default function FloatingNav() {
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <motion.div key={item.href} whileTap={{ scale: 0.95 }}>
-              <Link
-                href={item.href}
-                className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? "bg-[#e9ecef] text-[#212529] dark:bg-white/[0.14] dark:text-white"
-                    : "text-[#6c757d] hover:text-[#212529] dark:text-white/40 dark:hover:text-white/75"
-                }`}
-              >
-                {item.label}
-              </Link>
-            </motion.div>
+            <motion.button
+              key={item.href}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                if (isActive) return;
+                navigate(item.href);
+              }}
+              className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-[#e9ecef] text-[#212529] dark:bg-white/[0.14] dark:text-white"
+                  : "text-[#6c757d] hover:text-[#212529] dark:text-white/40 dark:hover:text-white/75"
+              }`}
+            >
+              {item.label}
+            </motion.button>
           );
         })}
 
