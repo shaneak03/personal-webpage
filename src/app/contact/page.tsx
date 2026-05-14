@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Button, Input, Textarea, addToast } from "@heroui/react";
+import { useMemo, useState } from "react";
+import { Button, Input, Textarea, addToast, closeToast } from "@heroui/react";
+
+const fallbackEmail = "shaneak03@gmail.com";
+const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,6 +13,15 @@ export default function Contact() {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fallbackMailto = useMemo(() => {
+    const subject = encodeURIComponent("Website contact fallback");
+    const body = encodeURIComponent(
+      "Hi Shane,\n\nI tried the website contact form but it failed."
+    );
+
+    return `mailto:${fallbackEmail}?subject=${subject}&body=${body}`;
+  }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -20,30 +32,66 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formspreeEndpoint) {
+      addToast({
+        title: "Contact form unavailable",
+        description: `The contact form is not configured yet. Please email ${fallbackEmail} directly.`,
+        color: "warning",
+        timeout: 8000,
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    try {
-      const subject = encodeURIComponent(`Website contact from ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-      );
+    const sendingToastKey = addToast({
+      title: "Sending message…",
+      description: "Submitting your message now.",
+      color: "default",
+      timeout: 0,
+    });
 
-      window.location.href = `mailto:shanearkarkyaw@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { error?: string; errors?: Array<{ message?: string }> }
+        | null;
+
+      if (!response.ok) {
+        const providerMessage = result?.errors?.[0]?.message || result?.error;
+        throw new Error(providerMessage || "Unable to send your message right now.");
+      }
+
+      setFormData({ name: "", email: "", message: "" });
 
       addToast({
-        title: "Opening your email app",
-        description: "Send the message from your mail client to get in touch.",
+        title: "Message sent",
+        description: "Thanks — your message has been sent to Shane.",
         color: "success",
       });
-                
-      setFormData({ name: "", email: "", message: "" });
-    } catch {
+    } catch (error) {
+      const description = error instanceof Error ? error.message : "Please try again later.";
+
       addToast({
-        title: "Something went wrong",
-        description: "Please try again later.",
+        title: "Message failed",
+        description: `${description} You can also email ${fallbackEmail} directly.`,
         color: "danger",
+        timeout: 8000,
       });
     } finally {
+      if (sendingToastKey) {
+        closeToast(sendingToastKey);
+      }
+
       setIsSubmitting(false);
     }
   };
@@ -57,7 +105,7 @@ export default function Contact() {
           </h1>
         </div>
 
-        <div className="bg-black/80 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-black/80 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl space-y-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <Input
@@ -105,6 +153,14 @@ export default function Contact() {
               </Button>
             </div>
           </form>
+
+          <p className="text-sm text-center text-gray-400">
+            Messages go straight to {fallbackEmail}. If the form has trouble sending, email me directly at{" "}
+            <a className="text-purple-400 hover:text-purple-300 underline underline-offset-4" href={fallbackMailto}>
+              {fallbackEmail}
+            </a>
+            .
+          </p>
         </div>
       </div>
     </main>

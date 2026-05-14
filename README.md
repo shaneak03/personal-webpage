@@ -13,6 +13,21 @@ GitHub Actions deploys by SSHing into the VPS and running:
 
 See `deploy/vps.md` for the VPS layout, required GitHub secrets, and Cloudflare Tunnel port mapping.
 
+## Contact Form Configuration
+
+The contact page now submits directly to Formspree.
+
+Required environment variable:
+
+```bash
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
+```
+
+Setup notes:
+- Create a Formspree form that delivers submissions to `shaneak03@gmail.com`.
+- Copy the form endpoint into `NEXT_PUBLIC_FORMSPREE_ENDPOINT`.
+- The UI shows sending/sent/failed toast states and falls back to direct email if Formspree is unavailable.
+
 ## Getting Started
 
 First, run the development server:
