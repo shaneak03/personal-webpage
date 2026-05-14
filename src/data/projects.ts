@@ -31,9 +31,14 @@ export const projects: Project[] = [
   {
     title: "Personal Webpage",
     period: "In Progress",
-    description: "An attempt on a modern portfolio website built with Next.js, React, and TailwindCSS featuring HeroUI components and animations.",
-    highlights: [],
-    tech: ["Next.js", "React", "TypeScript", "TailwindCSS", "HeroUI"],
+    description:
+      "An evolving personal portfolio built with Next.js, React, and TailwindCSS, now shaped around more intentional motion design and interactive UI details.",
+    highlights: [
+      "Added Framer Motion powered staggered reveals on the landing page to make the hero section feel more polished and alive.",
+      "Built reusable motion helpers for scroll-based entrances and smoother section transitions across the site.",
+      "Layered in interactive touches like the liquid cursor glow, animated navigation states, and progress feedback to make the browsing experience feel more dynamic.",
+    ],
+    tech: ["Next.js", "React", "TypeScript", "TailwindCSS", "HeroUI", "Framer Motion"],
     links: [
       {
         label: "GitHub",

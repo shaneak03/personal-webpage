@@ -130,7 +130,7 @@ export const timeline: TimelineEntry[] = [
     accent: "from-red-400 via-orange-500 to-amber-400",
     media: [
       {
-        src: "/Ord_pic.JPG",
+        src: "/Ord_Pic.JPG",
         alt: "Last Duty"
       },
       {
