@@ -18,6 +18,22 @@ interface MediaCarouselProps {
   expandedImageClassName?: string;
 }
 
+function ChevronLeft() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default function MediaCarousel({
   items = [],
   placeholders = [],
@@ -39,26 +55,18 @@ export default function MediaCarousel({
 
   const closeLightbox = () => setSelectedImageIndex(null);
   const showPreviousImage = () => {
-    if (selectedImageIndex === null) {
-      return;
-    }
-
-    setSelectedImageIndex(
-      (selectedImageIndex - 1 + items.length) % items.length,
-    );
+    if (selectedImageIndex === null) return;
+    setSelectedImageIndex((selectedImageIndex - 1 + items.length) % items.length);
   };
   const showNextImage = () => {
-    if (selectedImageIndex === null) {
-      return;
-    }
-
+    if (selectedImageIndex === null) return;
     setSelectedImageIndex((selectedImageIndex + 1) % items.length);
   };
   const showPreviousCarouselImage = () => {
-    setCarouselIndex((currentIndex) => (currentIndex - 1 + items.length) % items.length);
+    setCarouselIndex((i) => (i - 1 + items.length) % items.length);
   };
   const showNextCarouselImage = () => {
-    setCarouselIndex((currentIndex) => (currentIndex + 1) % items.length);
+    setCarouselIndex((i) => (i + 1) % items.length);
   };
 
   return (
@@ -88,7 +96,7 @@ export default function MediaCarousel({
                     src={items[carouselIndex].src}
                     alt={items[carouselIndex].alt}
                     fill
-                    sizes="(max-width: 768px) 100vw, 560px"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 560px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </motion.button>
@@ -99,16 +107,18 @@ export default function MediaCarousel({
                   <button
                     type="button"
                     onClick={showPreviousCarouselImage}
-                    className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/45 px-3 py-2 text-sm text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
                   >
-                    Prev
+                    <ChevronLeft />
                   </button>
                   <button
                     type="button"
                     onClick={showNextCarouselImage}
-                    className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/45 px-3 py-2 text-sm text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
                   >
-                    Next
+                    <ChevronRight />
                   </button>
                 </>
               )}
@@ -202,7 +212,7 @@ export default function MediaCarousel({
                           src={selectedImage.src}
                           alt={selectedImage.alt}
                           fill
-                          sizes="100vw"
+                          sizes="(max-width: 1280px) 100vw, 1152px"
                           className={expandedImageClassName}
                         />
                       </motion.div>
@@ -214,16 +224,18 @@ export default function MediaCarousel({
                       <button
                         type="button"
                         onClick={showPreviousImage}
-                        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/45 px-4 py-3 text-sm text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
+                        aria-label="Previous image"
+                        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
                       >
-                        Prev
+                        <ChevronLeft />
                       </button>
                       <button
                         type="button"
                         onClick={showNextImage}
-                        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/45 px-4 py-3 text-sm text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
+                        aria-label="Next image"
+                        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/45 text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/65"
                       >
-                        Next
+                        <ChevronRight />
                       </button>
                       <div className="absolute bottom-4 right-4 flex gap-2 rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-md">
                         {items.map((item, index) => (

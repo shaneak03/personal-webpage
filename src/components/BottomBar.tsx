@@ -1,39 +1,37 @@
 import Image from "next/image";
 
-const style = { filter: 'brightness(0) invert(1) opacity(0.8)' }
-
 export default function BottomBar() {
   return (
     <footer className="fixed bottom-4 left-1/2 z-40 -translate-x-1/2">
-      <div className="flex items-center gap-6 rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))] px-5 py-3 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+      <div className="flex items-center gap-5 rounded-full border border-black/[0.07] bg-white/65 px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.07)] backdrop-blur-2xl dark:border-white/[0.12] dark:bg-white/[0.05] dark:shadow-[0_8px_36px_rgba(0,0,0,0.45)]">
         <a
           href="https://github.com/shaneak03"
           target="_blank"
           rel="noopener noreferrer"
-          className="opacity-70 transition-opacity duration-200 hover:opacity-100"
+          aria-label="GitHub"
+          className="opacity-50 transition-opacity duration-200 hover:opacity-90"
         >
           <Image
             src="/github.svg"
             alt="GitHub"
-            width={32}
-            height={32}
-            className="h-8 w-8 brightness-0 invert"
-            style={style}
+            width={28}
+            height={28}
+            className="h-7 w-7 brightness-0 dark:brightness-0 dark:invert"
           />
         </a>
         <a
           href="https://www.linkedin.com/in/shane-arkar-kyaw/"
           target="_blank"
           rel="noopener noreferrer"
-          className="opacity-70 transition-opacity duration-200 hover:opacity-100"
+          aria-label="LinkedIn"
+          className="opacity-50 transition-opacity duration-200 hover:opacity-90"
         >
           <Image
             src="/linkedin.png"
             alt="LinkedIn"
-            width={32}
-            height={32}
-            className="h-8 w-8"
-            style={style}
+            width={28}
+            height={28}
+            className="h-7 w-7 brightness-0 dark:brightness-0 dark:invert"
           />
         </a>
       </div>

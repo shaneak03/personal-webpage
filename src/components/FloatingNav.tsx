@@ -3,56 +3,76 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/components/ThemeContext";
 
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-interface FloatingNavProps {
-  items?: NavItem[];
-  className?: string;
-  name?: string;
-}
-
-const defaultNavItems: NavItem[] = [
-  { label: "Home", href: "/" },
+const navItems = [
+  { label: "Home",     href: "/" },
   { label: "About Me", href: "/about" },
   { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact",  href: "/contact" },
 ];
 
-export default function FloatingNav({ items = defaultNavItems, className = "", name = "Shane" }: FloatingNavProps) {
+function SunIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
+
+export default function FloatingNav() {
   const pathname = usePathname();
+  const { theme, toggle } = useTheme();
 
   return (
-    <div className={`fixed left-1/2 top-4 z-50 w-[calc(100%-1.25rem)] max-w-4xl -translate-x-1/2 sm:top-6 ${className}`}>
-      <nav
-        className="flex flex-col gap-3 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05))] px-4 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:rounded-full sm:px-6 sm:py-3"
-      >
-        <div className="flex items-center justify-center sm:justify-start">
-          <p className="text-base font-bold text-white sm:text-lg">{name}</p>
-        </div>
-        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-1">
-          {items.map((item) => {
-            const isActive = pathname === item.href;
+    <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2 sm:top-6">
+      <nav className="flex items-center gap-1 rounded-full border border-black/[0.07] bg-white/65 px-2 py-2 shadow-[0_4px_20px_rgba(0,0,0,0.07)] backdrop-blur-2xl dark:border-white/[0.13] dark:bg-white/[0.05] dark:shadow-[0_4px_32px_rgba(0,0,0,0.4)]">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <motion.div key={item.href} whileTap={{ scale: 0.95 }}>
+              <Link
+                href={item.href}
+                className={`flex items-center rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#e9ecef] text-[#212529] dark:bg-white/[0.14] dark:text-white"
+                    : "text-[#6c757d] hover:text-[#212529] dark:text-white/40 dark:hover:text-white/75"
+                }`}
+              >
+                {item.label}
+              </Link>
+            </motion.div>
+          );
+        })}
 
-            return (
-              <motion.div key={item.href} whileTap={{ scale: 0.96 }}>
-                <Link
-                  href={item.href}
-                  className={`flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 sm:text-base ${
-                    isActive
-                      ? "bg-white/14 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Divider */}
+        <div className="mx-1 h-4 w-px bg-[#dee2e6] dark:bg-white/[0.12]" />
+
+        {/* Theme toggle */}
+        <motion.button
+          whileTap={{ scale: 0.88 }}
+          onClick={toggle}
+          aria-label="Toggle theme"
+          className="flex h-8 w-8 items-center justify-center rounded-full text-[#6c757d] transition-all duration-200 hover:bg-[#e9ecef] hover:text-[#212529] dark:text-white/40 dark:hover:bg-white/[0.14] dark:hover:text-white"
+        >
+          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+        </motion.button>
       </nav>
     </div>
   );

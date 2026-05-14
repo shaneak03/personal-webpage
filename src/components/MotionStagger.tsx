@@ -45,7 +45,7 @@ export function MotionStagger({
       }}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.05 }}
     >
       {children}
     </motion.div>
