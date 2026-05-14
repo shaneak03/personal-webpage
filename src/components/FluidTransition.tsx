@@ -143,7 +143,7 @@ export function FluidContentWrapper({
   const { phase, turbRef, dispRef } = useContext(FluidTransitionContext);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const rafRef     = useRef<number>();
+  const rafRef     = useRef<number>(0);
   const turbT      = useRef(0);     // accumulates to animate the turbulence
   const lastNow    = useRef(0);
 
