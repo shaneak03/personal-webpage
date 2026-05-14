@@ -23,7 +23,7 @@ export default function MotionReveal({
       className={className}
       initial={{ opacity: 0, y, filter: "blur(10px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{
         duration: 0.7,
         delay,

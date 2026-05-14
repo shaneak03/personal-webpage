@@ -7,41 +7,40 @@ interface AboutTimelineCardProps {
   index: number;
 }
 
-export default function AboutTimelineCard({
-  entry,
-  index,
-}: AboutTimelineCardProps) {
+export default function AboutTimelineCard({ entry, index }: AboutTimelineCardProps) {
   return (
-    <MotionReveal
-      delay={0.12 + index * 0.06}
-      className="relative md:pl-16"
-    >
+    <MotionReveal delay={0.12 + index * 0.06} className="relative md:pl-16">
+
+      {/* Timeline dot */}
       <div className="absolute left-0 top-8 hidden md:flex">
-        <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/15 bg-[#0c1428] shadow-[0_0_30px_rgba(0,0,0,0.25)]">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#dee2e6] bg-white shadow-sm dark:border-white/[0.15] dark:bg-[#0c1428] dark:shadow-[0_0_24px_rgba(0,0,0,0.3)]">
           <span className="text-base leading-none">{entry.emoji}</span>
         </div>
       </div>
 
-      <article className="overflow-hidden rounded-[2rem] border border-gray-700/50 bg-black/80 shadow-2xl backdrop-blur-md">
-        <div className="border-b border-white/8 px-6 py-5 sm:px-8">
+      <article className="overflow-hidden rounded-2xl border border-[#e9ecef] bg-white shadow-[0_1px_4px_rgba(0,0,0,0.04),0_4px_20px_rgba(0,0,0,0.06)] dark:border-white/[0.09] dark:bg-white/[0.05] dark:shadow-none dark:backdrop-blur-md">
+
+        {/* Header */}
+        <div className="border-b border-[#e9ecef] px-6 py-5 sm:px-8 dark:border-white/[0.08]">
           <p className={`mb-3 text-xs font-semibold uppercase tracking-[0.24em] bg-gradient-to-r ${entry.accent} bg-clip-text text-transparent`}>
             {entry.phase}
           </p>
-          <h2 className="flex items-center gap-3 text-2xl font-bold text-white sm:text-3xl">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-2xl shadow-[0_12px_30px_rgba(0,0,0,0.18)]">
+          <h2 className="flex items-center gap-3 text-2xl font-bold text-[#212529] sm:text-3xl dark:text-white">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#e9ecef] bg-[#f8f9fa] text-2xl dark:border-white/[0.10] dark:bg-white/[0.04]">
               {entry.emoji}
             </span>
             <span>{entry.title}</span>
           </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-[#6c757d] sm:text-base dark:text-white/60">
             {entry.description}
           </p>
         </div>
 
+        {/* Body */}
         <div className="grid gap-8 px-6 py-6 sm:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)] lg:items-start">
           <div>
             {entry.highlights && entry.highlights.length > 0 && (
-              <ul className="space-y-3 text-sm leading-7 text-slate-300">
+              <ul className="space-y-3 text-sm leading-7 text-[#6c757d] dark:text-white/55">
                 {entry.highlights.map((highlight) => (
                   <li key={highlight} className="flex gap-3">
                     <span className={`mt-2 h-2 w-2 shrink-0 rounded-full bg-gradient-to-r ${entry.accent}`} />
