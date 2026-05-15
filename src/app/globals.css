@@ -1,62 +1,74 @@
 @import "tailwindcss";
-@plugin "../../hero";
 
-/* HeroUI Tailwind v4 theme tokens (optional) */
+/* Use .dark class (on <html>) instead of prefers-color-scheme for dark: variants */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   --font-geist-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Liquid cursor — canvas opacity per theme */
+  --cursor-opacity: 0.28;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --cursor-opacity: 0.82;
 }
 
+/* ── Light mode (default) ── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans);
+  -webkit-font-smoothing: antialiased;
+  background-color: #f8f9fa;
+  color: #212529;
+  /* Layer 1: soft lavender blush from top — fixed to viewport */
+  /* Layer 2: dot grid — scrolls with page */
+  background-image:
+    radial-gradient(ellipse 100% 45% at 50% 0%, rgba(225, 210, 255, 0.65) 0%, transparent 100%),
+    radial-gradient(circle, #ced4da 1px, transparent 1px);
+  background-size: 100% 100%, 22px 22px;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, scroll;
 }
 
+/* ── Dark mode (toggled via .dark class on <html>) ── */
+.dark body {
+  background-color: #05050f;
+  color: #f0f0f0;
+  /* Aurora blobs — fixed to viewport so they don't scroll away */
+  background-image:
+    radial-gradient(ellipse 70% 65% at 5% 8%,  rgba(124, 58, 237, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 94% 6%,  rgba(6, 182, 212, 0.45)  0%, transparent 50%),
+    radial-gradient(ellipse 58% 62% at 90% 93%, rgba(236, 72, 153, 0.42) 0%, transparent 54%),
+    radial-gradient(ellipse 52% 52% at 4%  94%, rgba(99, 102, 241, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 38% 38% at 50% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 52%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ── Autofill overrides ── */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-text-fill-color: #ffffff;
-  caret-color: #ffffff;
-  box-shadow: 0 0 0 1000px rgba(17, 24, 39, 0.3) inset;
-  -webkit-box-shadow: 0 0 0 1000px rgba(17, 24, 39, 0.3) inset;
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: currentColor;
+  caret-color: currentColor;
+  box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 9999s ease-out 0s;
   border-radius: inherit;
 }
 
-input:-moz-autofill,
-textarea:-moz-autofill,
-select:-moz-autofill {
-  color: #ffffff;
-  box-shadow: 0 0 0 1000px rgba(17, 24, 39, 0.3) inset;
-}
-
 ::selection {
-  background-color: rgba(168, 85, 247, 0.35);
-  color: #ffffff;
-}
-input::selection,
-textarea::selection {
-  background-color: rgba(168, 85, 247, 0.5);
-  color: #ffffff;
+  background-color: rgba(124, 58, 237, 0.22);
+  color: inherit;
 }

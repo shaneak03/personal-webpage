@@ -1,0 +1,1 @@
+[[{"Pattern":"import \u0022./globals.css\u0022;","Replacement":"// @ts-expect-error: CSS module import\nimport \u0022./globals.css\u0022;"}]]

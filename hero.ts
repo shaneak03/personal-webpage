@@ -1,3 +1,5 @@
-// HeroUI Tailwind v4 helper to export heroui plugin
-import { heroui } from "@heroui/react";
-export default heroui();
+// Tailwind CSS plugin placeholder
+// HeroUI components work directly without this plugin
+const heroPluginPlaceholder = {};
+
+export default heroPluginPlaceholder;
