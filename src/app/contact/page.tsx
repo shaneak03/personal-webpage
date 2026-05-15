@@ -5,9 +5,15 @@ import { Button } from "@heroui/react";
 import MotionReveal from "@/components/MotionReveal";
 import { MotionStagger, MotionStaggerItem } from "@/components/MotionStagger";
 
+const fallbackEmail = "shaneak03@gmail.com";
+const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+
+type Status = { type: "success" | "error" | "warning"; message: string } | null;
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<Status>(null);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -15,16 +21,48 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus(null);
+
+    if (!formspreeEndpoint) {
+      setStatus({
+        type: "warning",
+        message: `The contact form isn't configured yet. Please email ${fallbackEmail} directly.`,
+      });
+      return;
+    }
+
     setIsSubmitting(true);
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert("Message sent successfully!");
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { error?: string; errors?: Array<{ message?: string }> }
+        | null;
+
+      if (!response.ok) {
+        const providerMessage = result?.errors?.[0]?.message || result?.error;
+        throw new Error(providerMessage || "Unable to send your message right now.");
+      }
+
       setFormData({ name: "", email: "", message: "" });
-    } catch {
-      alert("Failed to send message. Please try again.");
+      setStatus({ type: "success", message: "Message sent — I'll get back to you soon!" });
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : "Please try again later.";
+      setStatus({ type: "error", message: msg });
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const statusStyles = {
+    success: "border-green-200 bg-green-50 text-green-800 dark:border-green-500/20 dark:bg-green-500/10 dark:text-green-300",
+    error:   "border-red-200 bg-red-50 text-red-800 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-300",
+    warning: "border-yellow-200 bg-yellow-50 text-yellow-800 dark:border-yellow-500/20 dark:bg-yellow-500/10 dark:text-yellow-300",
   };
 
   return (
@@ -70,10 +108,10 @@ export default function Contact() {
                   <input
                     id="contact-name"
                     type="text"
+                    required
                     placeholder="Enter your name"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
-                    aria-label="Your Name"
                     className="min-h-[52px] w-full rounded-xl border border-[#dee2e6] bg-[#f8f9fa] px-4 text-[#212529] outline-none transition-colors duration-200 placeholder:text-[#ced4da] hover:border-[#ced4da] focus:border-[#adb5bd] focus:bg-white dark:border-white/[0.10] dark:bg-white/[0.05] dark:text-white dark:placeholder:text-white/25 dark:hover:bg-white/[0.08] dark:focus:border-white/[0.20] dark:focus:bg-white/[0.08]"
                   />
                 </MotionStaggerItem>
@@ -85,10 +123,10 @@ export default function Contact() {
                   <input
                     id="contact-email"
                     type="email"
+                    required
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    aria-label="Email Address"
                     className="min-h-[52px] w-full rounded-xl border border-[#dee2e6] bg-[#f8f9fa] px-4 text-[#212529] outline-none transition-colors duration-200 placeholder:text-[#ced4da] hover:border-[#ced4da] focus:border-[#adb5bd] focus:bg-white dark:border-white/[0.10] dark:bg-white/[0.05] dark:text-white dark:placeholder:text-white/25 dark:hover:bg-white/[0.08] dark:focus:border-white/[0.20] dark:focus:bg-white/[0.08]"
                   />
                 </MotionStaggerItem>
@@ -100,19 +138,22 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="contact-message"
+                  required
                   placeholder="Send me a message or just say hi!"
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
-                  aria-label="Message"
                   rows={8}
                   className="min-h-[200px] w-full rounded-xl border border-[#dee2e6] bg-[#f8f9fa] p-4 text-[#212529] outline-none transition-colors duration-200 placeholder:text-[#ced4da] hover:border-[#ced4da] focus:border-[#adb5bd] focus:bg-white dark:border-white/[0.10] dark:bg-white/[0.05] dark:text-white dark:placeholder:text-white/25 dark:hover:bg-white/[0.08] dark:focus:border-white/[0.20] dark:focus:bg-white/[0.08]"
                 />
               </MotionStaggerItem>
 
-              <MotionStaggerItem className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-[#adb5bd] dark:text-white/30">
-                  Thanks for taking the time to reach out.
+              {status && (
+                <p className={`rounded-xl border px-4 py-3 text-sm ${statusStyles[status.type]}`}>
+                  {status.message}
                 </p>
+              )}
+
+              <MotionStaggerItem className="flex justify-end pt-2">
                 <Button
                   type="submit"
                   isDisabled={isSubmitting}
@@ -124,6 +165,7 @@ export default function Contact() {
             </form>
           </MotionStagger>
         </MotionReveal>
+
       </div>
     </main>
   );
