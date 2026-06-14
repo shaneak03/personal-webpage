@@ -1,0 +1,20 @@
+name: Test Tailscale SSH
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Test SSH port
+        run: |
+          nc -vz "${{ secrets.DEPLOY_HOST }}" "${{ secrets.DEPLOY_PORT }}"
